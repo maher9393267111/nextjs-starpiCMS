@@ -15,6 +15,7 @@
     "next": "12.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "safe-json-stringify": "^1.2.0",
     "tailwind-styled-components": "^2.1.8"
   },
   "devDependencies": {

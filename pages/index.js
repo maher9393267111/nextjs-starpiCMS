@@ -17,39 +17,6 @@ export default function Home({posts}) {
 
 console.log('posts',posts)
 
-// useEffect(() => {
-
-
-// fetchposts()
-
-// }, [])
-
-
-const fetchposts = async () => {
-
-  const res = await axios.get('http://localhost:1337/api/posts')
- 
-
-
-  try {
-   
-    const json = await res.data.data
-
-    setData(json);
-    console.log('json---->', json)
-
-
-  } catch (error) {
-   console.log('error', error)
-  }
-
-
-
-
-
-
-
-}
 
 
   return (
