@@ -8,9 +8,9 @@ const client = new ApolloClient({
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <ApolloProvider client={client}>
+      {/* <ApolloProvider client={client}> */}
      <Component {...pageProps} />
-      </ApolloProvider>
+      {/* </ApolloProvider> */}
     </>
   )
 }

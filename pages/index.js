@@ -5,14 +5,24 @@ import tw from "tailwind-styled-components"
 import axios from 'axios'
 import { useState ,useEffect } from 'react'
 import Link from 'next/link'
-export default function Home() {
+import { useQuery, gql } from '@apollo/client'
+import { getPosts } from '../services'
+
+
+
+
+export default function Home({posts}) {
 
   const [data, setData] = useState([])
-useEffect(() => {
 
-fetchposts()
+console.log('posts',posts)
 
-}, [])
+// useEffect(() => {
+
+
+// fetchposts()
+
+// }, [])
 
 
 const fetchposts = async () => {
@@ -54,7 +64,7 @@ const fetchposts = async () => {
 <div className= ' text-2xl text-center '>
   next starpi app
 
-
+{/* 
 <div>
   {data.map((item, index) => {
     return (
@@ -68,8 +78,12 @@ const fetchposts = async () => {
         </h1>
       </div>
     )})}
-</div>
+</div> */}
 
+
+<div>
+
+</div>
 
 </div>
 
@@ -78,4 +92,13 @@ const fetchposts = async () => {
   )
 }
 
+
+
+export async function getStaticProps() {
+  const posts = (await getPosts()) || [];
+
+  return{
+    props: {posts}
+  }
+}
 
