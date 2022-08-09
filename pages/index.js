@@ -1,8 +1,47 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-
+import tw from "tailwind-styled-components"
+import axios from 'axios'
+import { useState ,useEffect } from 'react'
+import Link from 'next/link'
 export default function Home() {
+
+  const [data, setData] = useState([])
+useEffect(() => {
+
+fetchposts()
+
+}, [])
+
+
+const fetchposts = async () => {
+
+  const res = await axios.get('http://localhost:1337/api/posts')
+ 
+
+
+  try {
+   
+    const json = await res.data.data
+
+    setData(json);
+    console.log('json---->', json)
+
+
+  } catch (error) {
+   console.log('error', error)
+  }
+
+
+
+
+
+
+
+}
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,59 +50,32 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+   
+<div className= ' text-2xl text-center '>
+  next starpi app
+
+
+<div>
+  {data.map((item, index) => {
+    return (
+      <div key='item.id' className =' my-4 text-2xl font-bold'>
+        <h1>
+          <Link href={`/${item.id}`}>
+          {item.attributes.title}
+          </Link>
+
+          
         </h1>
+      </div>
+    )})}
+</div>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+</div>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   )
 }
+
+
