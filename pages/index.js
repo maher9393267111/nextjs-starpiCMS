@@ -7,7 +7,7 @@ import { useState ,useEffect } from 'react'
 import Link from 'next/link'
 import { useQuery, gql } from '@apollo/client'
 import { getPosts } from '../services'
-
+import {getCompaniesSlugs} from '../dataLayer/strapi/company'
 
 
 
@@ -16,6 +16,18 @@ export default function Home({posts}) {
   const [data, setData] = useState([])
 
 console.log('posts',posts)
+
+
+useEffect(() => {
+  getCompaniesSlugs().then(data => {
+    console.log('data-----------> companies',data)
+    setData(data)
+  }).catch(err => {
+    console.log(err)
+  }).finally(() => {
+    console.log('finally')
+  } )
+} ,[])
 
 
 
