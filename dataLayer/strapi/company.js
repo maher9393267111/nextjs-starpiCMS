@@ -21,3 +21,26 @@ export const getCompaniesSlugs = async () => {
     return rawSlugs;
   };
   
+
+
+  // find company by slug and populate image and logoImage
+
+  export const getCompanyBySlug = async ({ slug  }) => {
+    const query = qs.stringify(
+      {
+        filters: {
+          slug: {
+            $eq: slug,
+          },
+        },
+        populate: ['logo', 'coverImage'],
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+    const res = await axios.get(`${apiUrl}/companies?${query}`);
+    const rawCompany = res.data.data[0];
+    return  rawCompany;
+    //companyReducer(rawCompany);
+  };

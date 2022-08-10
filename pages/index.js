@@ -7,7 +7,8 @@ import { useState ,useEffect } from 'react'
 import Link from 'next/link'
 import { useQuery, gql } from '@apollo/client'
 import { getPosts } from '../services'
-import {getCompaniesSlugs} from '../dataLayer/strapi/company'
+import {getCompaniesSlugs , getCompanyBySlug } from '../dataLayer/strapi/company'
+import {getJobsSlugs} from '../dataLayer/strapi/job'
 
 
 
@@ -19,8 +20,8 @@ console.log('posts',posts)
 
 
 useEffect(() => {
-  getCompaniesSlugs().then(data => {
-    console.log('data-----------> companies',data)
+  getJobsSlugs().then(data => {
+    console.log('data-----------> jobs',data)
     setData(data)
   }).catch(err => {
     console.log(err)
