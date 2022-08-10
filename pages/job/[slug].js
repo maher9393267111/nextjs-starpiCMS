@@ -26,7 +26,7 @@ const Slug = () => {
  //   console.log('data---->', data)
     return (
         <div>
-            <h1>Slug</h1>
+            <h1>Slug travelll</h1>
         </div>
     );
 }
