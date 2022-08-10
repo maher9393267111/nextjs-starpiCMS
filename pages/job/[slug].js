@@ -1,29 +1,39 @@
 import React from 'react';
-import {getProductbySlug , QUERY_PRODUCT_BY_SLUG , GET_JOBS_BY_SLUG} from '../../services/queries'
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useQuery ,gql } from "@apollo/client"
+import { useState ,useEffect } from 'react'
+// utils
+import { queryStrapi } from '../../utils/query-strapi';
 
 
 
+// constants
+import {
+  GET_ALL_ARTICLE_SLUGS,
+  GET_ARTICLE_BY_SLUG,
+} from '../../graphql/queries.js';
+import { useRouter } from 'next/router';
 
-const Slug = () => {
-    const router = useRouter();
-    const { slug } = router.query;
-    // const { loading, error, data } = useQuery( , {
-    //     variables: {
-    //         slug
-    //     }
-    // })
+const Slug = ({slug}) => {
+   // console.log('article',article)
+
+const router = useRouter();
+//const { slug } = router.query;
+console.log('slug',slug)
+useEffect(() => {
+
+    if  (slug) {
+    fetchjobs();
+    }
+}, [])
 
 
-    
+const fetchjobs = async () => {
 
-    
+    const data = await queryStrapi(GET_ARTICLE_BY_SLUG(slug));
+    console.log('data',data)
+
+}
 
 
-  
- //   console.log('data---->', data)
     return (
         <div>
             <h1>Slug travelll</h1>
@@ -32,3 +42,14 @@ const Slug = () => {
 }
 
 export default Slug;
+
+
+
+  export async function getServerSideProps( context ) {
+    const slug = context.params.slug;
+  
+    return {
+      props: { slug: slug },
+      //revalidate: 10,
+    };
+  }
