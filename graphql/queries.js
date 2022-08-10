@@ -72,6 +72,7 @@ export const GET_PAGINATED_ARTICLES = (page, pageSize) => `
     }
   }`;
 
+  // woooooork
 export const GET_ARTICLE_BY_SLUG = (targetSlug) => `
   query {
     jobs(filters: { slug: {eq: "${targetSlug}"} }) {
@@ -85,6 +86,14 @@ export const GET_ARTICLE_BY_SLUG = (targetSlug) => `
               attributes {
                 name
                slug
+               coverImage { 
+                data {
+                    attributes {
+                        url
+                        
+                    }
+                }
+                }
               }
             }
           }

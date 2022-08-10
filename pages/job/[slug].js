@@ -3,6 +3,10 @@ import { useState ,useEffect } from 'react'
 // utils
 import { queryStrapi } from '../../utils/query-strapi';
 
+const imageurl = (image) => { 
+    const domain ='http://localhost:1337'
+    return `${domain}${image?.url}`
+}
 
 
 // constants
@@ -13,7 +17,8 @@ import {
 import { useRouter } from 'next/router';
 
 const Slug = ({slug}) => {
-   // console.log('article',article)
+  
+    const [job, setJob] = useState({});
 
 const router = useRouter();
 //const { slug } = router.query;
@@ -29,7 +34,9 @@ useEffect(() => {
 const fetchjobs = async () => {
 
     const data = await queryStrapi(GET_ARTICLE_BY_SLUG(slug));
-    console.log('data',data)
+    console.log('data',data?.jobs?.data[0]?.attributes)
+    setJob(data?.jobs?.data[0]?.attributes);
+   
 
 }
 
@@ -37,6 +44,15 @@ const fetchjobs = async () => {
     return (
         <div>
             <h1>Slug travelll</h1>
+            <h2>
+                {job.title}
+                {job.company?.data?.attributes?.name}
+
+<img src={
+    imageurl(job.company?.data?.attributes?.coverImage?.data?.attributes)
+} alt="" />
+
+            </h2>
         </div>
     );
 }
