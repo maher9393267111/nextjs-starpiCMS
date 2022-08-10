@@ -71,22 +71,16 @@ export const categoryslug = gql`
 export function getProductbySlug(slug) {
   return gql`
     query {
-      products(
-        filters: { pslug: { eq: "${slug}" } }
+      jobs (
+        filters: { slug: { eq: "${slug}" } }
       ) {
         data {
           attributes {
-            pid
-            pname
-            price
-            pslug
-            pdescription
-            pimage {
-              data {
-                attributes {
-                  url
-                }
-              }
+           title
+           slug
+
+           
+          
             }
           }
         }
@@ -94,6 +88,25 @@ export function getProductbySlug(slug) {
     }
   `;
 }
+
+
+export const QUERY_PRODUCT_BY_SLUG= gql`
+{
+  getjobBySlug(slug:$slug) {
+   
+    jobs {
+        attributes {
+            title
+            slug
+        }
+    }
+    }
+  
+}
+`
+
+
+
 
 export function getCategorybySlug(slug) {
   return gql`
@@ -126,3 +139,23 @@ export function getCategorybySlug(slug) {
     }
   `;
 }
+
+
+
+
+
+//------------------------------------------------------
+
+export const GET_JOBS_BY_SLUG = (targetSlug) => `
+  query {
+    jobs(filters: { slug: {eq: "${targetSlug}"} }) {
+      data {
+        attributes {
+            title
+            slug
+        }
+    
+         
+    }
+}
+  }`;

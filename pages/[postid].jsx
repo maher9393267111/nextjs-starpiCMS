@@ -8,16 +8,16 @@ import safeJsonStringify from "safe-json-stringify";
 
 
 const REVIEW = gql`
-  query GetReview($id: ID!) {
-    post(id: $id) {
-     data {
-      id
-      attributes {
-        title
-      }
-     }
+query GetReview($id: ID!) {
+  post(id: $id) {
+   data {
+    id
+    attributes {
+      title
     }
+   }
   }
+}
 `
 
 
