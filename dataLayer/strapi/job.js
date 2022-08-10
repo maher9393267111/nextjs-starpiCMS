@@ -51,3 +51,28 @@ export const getJobsSlugs = async () => {
     return  rawJob;
     //jobReducer(rawJob);
   };
+
+
+
+  export const getJobsByCompanyId = async ({ id }) => {
+    const query = qs.stringify(
+      {
+        filters: {
+          company: {
+            id: {
+              $eq: id,
+            },
+          },
+        },
+        populate: ['company', 'company.logo', 'company.coverImage', 'skills_tags'],
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+    const res = await axios.get(`${apiUrl}/jobs?${query}`);
+    const rawJobs = res.data.data;
+   // const jobs = rawJobs.map((rawJob) => jobReducer(rawJob, false));
+    return rawJobs;
+  };
+  
