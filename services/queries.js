@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const AllCompanies= gql`
+export const AllCompanies= gql`   
   query {
     companies {
       data {
@@ -22,19 +22,19 @@ export const AllCompanies= gql`
   }
 `;
 
-export const productsquery = gql`
-  query {
-    products {
+export const Allproducts = gql`
+query {
+    jobs {
       data {
         attributes {
-          pid
-          pname
-          price
-          pslug
-          pimage {
+          title
+            slug
+           company {
             data {
               attributes {
-                url
+                name
+                slug
+
               }
             }
           }

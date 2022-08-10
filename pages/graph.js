@@ -2,10 +2,10 @@ import React from 'react';
 import { useState ,useEffect } from 'react'
 import Link from 'next/link'
 import { useQuery, gql } from '@apollo/client'
-import { AllCompanies} from '../services/queries'
+import { AllCompanies, Allproducts} from '../services/queries'
 
 const Graph = () => {
-    const { loading, error, data } = useQuery(AllCompanies )
+    const { loading, error, data } = useQuery(Allproducts )
     console.log('data--------> Companis',data)
     
     return (
@@ -13,7 +13,7 @@ const Graph = () => {
             <h1>GraphQl Query</h1>
 
             <div>
-                {data?.companies?.data?.length}
+                {data?.jobs?.data?.length}
             </div>
         </div>
     );
