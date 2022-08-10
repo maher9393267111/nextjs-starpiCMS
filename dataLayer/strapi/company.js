@@ -6,7 +6,7 @@ console.log('apiUrl',apiUrl)
 export const getCompaniesSlugs = async () => {
     const query = qs.stringify(
       {
-        fields: ['slug' ,'name'],
+        fields: ['slug' ,'name','slogan'],
       },
       {
         encodeValuesOnly: true,
@@ -15,9 +15,9 @@ export const getCompaniesSlugs = async () => {
     const res = await axios.get(`${apiUrl}/companies?${query}`);
     const rawSlugs = res.data.data;
   
-    const slugs = rawSlugs.map((rawSlug) => {
-      return rawSlug.attributes.slug;
-    });
-    return slugs;
+    // const slugs = rawSlugs.map((rawSlug) => {
+    //   return rawSlug.attributes.slug;
+    // });
+    return rawSlugs;
   };
   
