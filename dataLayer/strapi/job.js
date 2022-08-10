@@ -76,3 +76,26 @@ export const getJobsSlugs = async () => {
     return rawJobs;
   };
   
+
+
+  // get all jobs
+
+  export const getJobs = async ({ page = 1, pageSize = 100 } = {}) => {
+    const query = qs.stringify(
+      {
+        populate: ['company', 'company.logo', 'company.coverImage', 'skillsTags'],
+        pagination: {
+          page,
+          pageSize,
+        },
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+    const res = await axios.get(`${apiUrl}/jobs?${query}`);
+    const rawJobs = res.data.data;
+  
+   // const jobs = rawJobs.map((rawJob) => jobReducer(rawJob, false));
+    return rawJobs;
+  };
