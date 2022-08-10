@@ -80,7 +80,7 @@ export const getJobsSlugs = async () => {
 
   // get all jobs
 
-  export const getJobs = async ({ page = 1, pageSize = 100 } = {}) => {
+  export const getJobs = async ({ page = 2, pageSize = 1 } = {}) => {
     const query = qs.stringify(
       {
         populate: ['company', 'company.logo', 'company.coverImage', 'skillsTags'],
